@@ -12,7 +12,7 @@ Sets
  J insieme dei prodotti /P1*P4/
  I insieme dei reparti /A*D/
 ;
-
+* Plurale se son più di uno o singolare se singolo
 Parameters
  D(j) domanda del prodotto j
 /
@@ -41,6 +41,8 @@ P4  8
 
 Scalar C capacità [h] dei reparti /1000/ ;
 
+* Table sempre singolare perchè bisogna definire ogni matrice di input
+* con un proprio comando Table
 Table tl(i,j) tempo di lavorazione di j in i
     P1   P2   P3   P4
 A  0.3  0.3 0.25 0.15
@@ -48,12 +50,17 @@ B 0.25 0.35  0.3  0.1
 C 0.45  0.5  0.4 0.22
 D 0.15 0.15  0.1 0.05
 ;
+* è necessario l'allineamento
+* carattere decimale è il punto (.)
+* la virgola (,) è il carattere separtore
+
 $Ontext
 Table è per matrici con dati
 Parameter è per matrici che rielaborano i dati
-$Offtext
+* esempio:
 Parameter tl_min(i,j) tempo lav. in minuti ;
 tl_min(i,j) = tl(i,j)*60 ;
+$Offtext
 
 Variables
  x(j) Quantità di j prodotta
@@ -61,7 +68,9 @@ Variables
  z    Variabile obiettivo (Profitti totali)
 ;
 
+* dominio di appartenenza
 Positive Variables x,s ;
+* z è libera
 
 Equations
  obiettivo  Funzione obiettivo
@@ -81,6 +90,8 @@ Vincolo ">=" ---> "=g="
 Vincolo "<" ---> Non modellabile (Non lineare)
 $Offtext
 
+* Modello ha nome e insieme di vincoli
+* Model Production /obiettivo,cap,dom/;
 Model Production /all/ ;
 Solve Production using LP maximizing z ;
 
@@ -94,6 +105,7 @@ Sat(i) = sum(j,tl(i,j)*x.l(j)) / C ;
 
 Display Xtot,Sat,x.l,s.l,z.l ;
 
+* Controllare nel file di log: ***Status: Normale completion
 
 ***Punto b)
 $OnText
@@ -124,7 +136,7 @@ Ytot = sum(j,sum(i,y.l(i,j))) ;
 Parameter Sat2(i) Saturazione nel reparto i ;
 Sat2(i) = sum(j,tl(i,j)*y.l(i,j)) / C ;
 
-Display Ytot,Sat2,x.l,s.l,z.l ;
+Display Ytot,Sat2,y.l,s.l,z.l ;
 
 
 

@@ -136,7 +136,7 @@ Ytot = sum(j,sum(i,y.l(i,j))) ;
 Parameter Sat2(i) Saturazione nel reparto i ;
 Sat2(i) = sum(j,tl(i,j)*y.l(i,j)) / C ;
 
-Display Ytot,Sat2,x.l,s.l,z.l ;
+Display Ytot,Sat2,y.l,s.l,z.l ;
 
 
 
