@@ -59,7 +59,7 @@ Positive Variables x,y ;
 Equations
  obiettivo    Funzione obiettivo
  disp(i)      Disponibilità del prodotto i
- prod_tot(j)  Produzione totale del composto j
+ prod_tot(j)  Produzione totale della benzina j
  lb_mix(i,j)  Lower bound sulla miscela
  ub_mix(i,j)  Ipper bound sulla miscela
 ;
